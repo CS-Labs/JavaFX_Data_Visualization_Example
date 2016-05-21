@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -25,6 +27,7 @@ import javafx.stage.StageStyle;
 public class MapController{
 	@FXML AnchorPane pane;
 	@FXML Button iconButton;
+	@FXML Canvas canvas;
 	//Get the map image. 
 	ImageView map = new ImageView(new Image(getClass().getResourceAsStream("/FXDataVis/map.png")));	
 		
@@ -38,14 +41,34 @@ public class MapController{
 	 */
 	public void initialize()
 	{
-
  	
 	}
 	
-
+	/**
+	 * If the icon button is clicked then invoke the other stage
+	 * that displays the data visualization. This method is called via
+	 * the FXML onAction command for the icon button.
+	 * 
+	 *  So a problem with making a transparent scene is it takes
+	 *  away the ability to exit (fixed) and move the screen (TODO)
+	 */
 	public void invokeOtherStage()
 	{
-
+		try {
+			Stage newStage = new Stage();
+			//Make the stage transparent. 
+			newStage.initStyle(StageStyle.TRANSPARENT);			
+			Parent root = FXMLLoader.load(getClass().getResource("/GUIandDataVisTeamTestPackage/DataVis.fxml"));
+			Scene scene = new Scene(root);
+			//Again needed for making the window
+			//transparent. 
+			scene.setFill(Color.TRANSPARENT);
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			newStage.setScene(scene);
+			newStage.show();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 	
