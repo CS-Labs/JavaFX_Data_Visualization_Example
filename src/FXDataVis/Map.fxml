@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.canvas.Canvas?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.ScrollPane?>
 
 
-<AnchorPane fx:id="pane" prefHeight="902.0" prefWidth="1800.0" style="-fx-background-image: -fx-background-image: url('/FXDataVis/map.png');" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXDataVis.MapController">
-   <children>
-      <Canvas fx:id="canvas" height="910.0" layoutX="-5.0" layoutY="-3.0" width="1807.0" />
-   </children>
-</AnchorPane>
+<ScrollPane id="scrollPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="902.0" prefWidth="1800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.65"  fx:controller="FXDataVis.MapBase">
+</ScrollPane>
