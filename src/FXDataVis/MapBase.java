@@ -30,7 +30,7 @@ public class MapBase extends Application
   BuildInteractiveRegions regionBuilder = new BuildInteractiveRegions(stackPane,
       this);
   Image mapImage = (new Image(
-      getClass().getResourceAsStream("/FXDataVis/map.png")));
+      getClass().getResourceAsStream("/FXDataVis/Resources/map.png")));
   ImageView map = new ImageView(mapImage);
 
   /**
