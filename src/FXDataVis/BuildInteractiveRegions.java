@@ -19,6 +19,14 @@ import javafx.scene.shape.SVGPath;
  * do not have listeners but if wanted they can be added). Also
  * if you click on the region it lights up and displays the regional
  * statistics.
+ * 
+ * Note: The method call of styleRegionPaths is made quite often so here
+ * is a brief overview of what the call is for. The methods parameters
+ * work as follows: 
+ * argument 1: Number corresponding to the region clicked.
+ * argument 2: The color that the boarder or whole region will be colored
+ * argument 3: The mode (e.g mode 1 is boarder change and mode 2 is whole region
+ * change.)
  *
  *
  */
@@ -26,6 +34,9 @@ public class BuildInteractiveRegions
 {
   private final int DEPTH = 70;
   private final Color TRANSPARENT = Color.TRANSPARENT;
+  // ArrayLists to hold the different region paths. This makes
+  // it easy to change elements of all paths at once by iterating
+  // through the elements of the array.
   private ArrayList<SVGPath> africaPaths = new ArrayList<>();
   private ArrayList<SVGPath> southAmericaPaths = new ArrayList<>();
   private ArrayList<SVGPath> middleAmericaPaths = new ArrayList<>();
@@ -44,49 +55,60 @@ public class BuildInteractiveRegions
   private ArrayList<SVGPath> europePaths = new ArrayList<>();
   private ArrayList<SVGPath> eastAsiaPaths = new ArrayList<>();
   private ArrayList<SVGPath> oceaniaPaths = new ArrayList<>();
-  
+
+  // Region whose statistics are currently being displayed.
   public int clickedRegion;
-  
+
   private SVGPaths SVG = new SVGPaths();
-  StackPane sp;
+
+  StackPane sp; // Container containing the map.
   MapBase main;
+  // Allow interaction with the statistical display (used to relay the name
+  // of the region which as been clicked.)
   FXStatisticalDisplaysController statController;
+  // Is there a region clicked?
   public boolean clicked;
-  
+
+  /**
+   * 
+   * @param sp-Container for regions and map.
+   * @param main-Instance of main class controls flow and creation of new stages.
+   */
   BuildInteractiveRegions(StackPane sp, MapBase main)
   {
-	this.main = main;
-    this.sp = sp; 
+    this.main = main;
+    this.sp = sp;
     this.clicked = false;
     this.clickedRegion = 0;
   }
-  
-  
+
+  /**
+   * Unlight up the region which is currently lit up.
+   */
   public void unLightUpRegion()
   {
-	  clicked = false;
-	  styleRegionPaths(clickedRegion, TRANSPARENT, 1); // Change Fill Color
-     styleRegionPaths(clickedRegion, TRANSPARENT, 2); // Change Fill Color
-  }
-  
-  
-  public void update()
-  {
-	  clicked = false;
-	  styleRegionPaths(clickedRegion, TRANSPARENT, 1); // Change Fill Color
+    clicked = false;
+    styleRegionPaths(clickedRegion, TRANSPARENT, 1); // Change Fill Color
     styleRegionPaths(clickedRegion, TRANSPARENT, 2); // Change Fill Color
   }
- /**
-  * 
-  * @param RegionColor
-  * @param GlowColor
-  * @param fillColor
-  * Build Africa's Region Path
-  */
+
+  /**
+   * 
+   * @param RegionColor Region border color.
+   * @param GlowColor for region boarder.
+   * @param fillColor for inside of regions boarder.
+   * Method to build Africa's Region Path(s)
+   * Main tasks the method accomplishes: 
+   * ~Create Drop Shadow
+   * ~Create SVG Path objects
+   * ~Add listeners to SVG Path objects
+   * ~Add SVG Path objects (regions) to the StackPane container. 
+   * 
+   */
   public void buildAfricaPath(Color RegionColor, Color GlowColor,
       Color fillColor)
   {
-
+    
     DropShadow africaBoarderGlow = new DropShadow();
     africaBoarderGlow.setOffsetY(0f);
     africaBoarderGlow.setOffsetX(0f);
@@ -121,7 +143,7 @@ public class BuildInteractiveRegions
 
     africaMainPath.setOnMouseMoved(evt ->
     {
-      
+
       styleRegionPaths(1, RegionColor, 1); // Change Stroke Color
     });
 
@@ -142,35 +164,42 @@ public class BuildInteractiveRegions
 
     africaMainPath.setOnMousePressed((event) ->
     {
-    	if(!clicked)
-    	{
-    	styleRegionPaths(1, fillColor, 2);
-    	main.invokeOtherStage();
-    	statController.setRegionName("Sub-Saharan Africa");
+      if (!clicked)
+      {
+        styleRegionPaths(1, fillColor, 2);
+        main.invokeOtherStage();
+        statController.setRegionName("Sub-Saharan Africa");
         clicked = true;
         clickedRegion = 1;
-    	}
+      }
     });
     africaSubPath.setOnMousePressed((event) ->
     {
-    	if(!clicked)
-    	{
-    	styleRegionPaths(1, fillColor, 2);
-    	main.invokeOtherStage();
-    	statController.setRegionName("Sub-Saharan Africa");
+      if (!clicked)
+      {
+        styleRegionPaths(1, fillColor, 2);
+        main.invokeOtherStage();
+        statController.setRegionName("Sub-Saharan Africa");
         clicked = true;
         clickedRegion = 1;
-    	}
+      }
     });
     sp.getChildren().addAll(africaMainPath, africaSubPath);
   }
-/**
- * 
- * @param RegionColor
- * @param GlowColor
- * @param fillColor
- * Build South America's Region Path.
- */
+
+  /**
+   * 
+   * @param RegionColor Region border color.
+   * @param GlowColor for region boarder.
+   * @param fillColor for inside of regions boarder.
+   * Method to build South Americas Region Path(s)
+   * Main tasks the method accomplishes: 
+   * ~Create Drop Shadow
+   * ~Create SVG Path objects
+   * ~Add listeners to SVG Path objects
+   * ~Add SVG Path objects (regions) to the StackPane container. 
+   * 
+   */
   public void buildSouthAmericaPath(Color RegionColor, Color GlowColor,
       Color fillColor)
   {
@@ -207,27 +236,34 @@ public class BuildInteractiveRegions
 
     southAmericaPath.setOnMousePressed((event) ->
     {
-    	if(!clicked)
-    	{
-    	styleRegionPaths(2, fillColor, 2);
-    	main.invokeOtherStage();
-    	statController.setRegionName("South America");
+      if (!clicked)
+      {
+        styleRegionPaths(2, fillColor, 2);
+        main.invokeOtherStage();
+        statController.setRegionName("South America");
         clicked = true;
         clickedRegion = 2;
-    	}
+      }
 
     });
 
     sp.getChildren().add(southAmericaPath);
 
   }
-/**
- * 
- * @param RegionColor
- * @param GlowColor
- * @param fillColor
- * Build Middle America's Region Path
- */
+
+  /**
+   * 
+   * @param RegionColor Region border color.
+   * @param GlowColor for region boarder.
+   * @param fillColor for inside of regions boarder.
+   * Method to build Middle Americas Region Path(s)
+   * Main tasks the method accomplishes: 
+   * ~Create Drop Shadow
+   * ~Create SVG Path objects
+   * ~Add listeners to SVG Path objects
+   * ~Add SVG Path objects (regions) to the StackPane container. 
+   * 
+   */
   public void buildMiddleAmericaPath(Color RegionColor, Color GlowColor,
       Color fillColor)
   {
@@ -356,36 +392,36 @@ public class BuildInteractiveRegions
 
     middleAmericaMainPath.setOnMousePressed((event) ->
     {
-    	if(!clicked)
-    	{
-    	styleRegionPaths(3, fillColor, 2);
-    	main.invokeOtherStage();
-    	statController.setRegionName("Middle America");
+      if (!clicked)
+      {
+        styleRegionPaths(3, fillColor, 2);
+        main.invokeOtherStage();
+        statController.setRegionName("Middle America");
         clicked = true;
         clickedRegion = 3;
-    	}
+      }
     });
     middleAmericaLargeSubPath1.setOnMousePressed((event) ->
     {
-    	if(!clicked)
-    	{
-    	styleRegionPaths(3, fillColor, 2);
-    	main.invokeOtherStage();
-    	statController.setRegionName("Middle America");
+      if (!clicked)
+      {
+        styleRegionPaths(3, fillColor, 2);
+        main.invokeOtherStage();
+        statController.setRegionName("Middle America");
         clicked = true;
         clickedRegion = 3;
-    	}
+      }
     });
     middleAmericaLargeSubPath2.setOnMousePressed((event) ->
     {
-    	if(!clicked)
-    	{
-    	styleRegionPaths(3, fillColor, 2);
-    	main.invokeOtherStage();
-    	statController.setRegionName("Middle America");
+      if (!clicked)
+      {
+        styleRegionPaths(3, fillColor, 2);
+        main.invokeOtherStage();
+        statController.setRegionName("Middle America");
         clicked = true;
         clickedRegion = 3;
-    	}
+      }
     });
     sp.getChildren().addAll(middleAmericaMainPath, middleAmericaLargeSubPath1,
         middleAmericaLargeSubPath2, middleAmericaSmallSubPath1,
@@ -393,14 +429,20 @@ public class BuildInteractiveRegions
         middleAmericaSmallSubPath4);
 
   }
-/**
- * 
- * @param RegionColor
- * @param GlowColor
- * @param fillColor
- * 
- * Build California's Region Path
- */
+
+  /**
+   * 
+   * @param RegionColor Region border color.
+   * @param GlowColor for region boarder.
+   * @param fillColor for inside of regions boarder.
+   * Method to build California's Region Path(s)
+   * Main tasks the method accomplishes: 
+   * ~Create Drop Shadow
+   * ~Create SVG Path objects
+   * ~Add listeners to SVG Path objects
+   * ~Add SVG Path objects (regions) to the StackPane container. 
+   * 
+   */
   public void buildCaliforniaPath(Color RegionColor, Color GlowColor,
       Color fillColor)
   {
@@ -436,23 +478,30 @@ public class BuildInteractiveRegions
 
     californiaPath.setOnMousePressed((event) ->
     {
-    	if(!clicked)
-    	{
-    	styleRegionPaths(4, fillColor, 2);
-    	main.invokeOtherStage();
-    	statController.setRegionName("California");
+      if (!clicked)
+      {
+        styleRegionPaths(4, fillColor, 2);
+        main.invokeOtherStage();
+        statController.setRegionName("California");
         clicked = true;
         clickedRegion = 4;
-    	}
+      }
     });
     sp.getChildren().add(californiaPath);
   }
+
   /**
    * 
-   * @param RegionColor
-   * @param GlowColor
-   * @param fillColor
-   * Build PNW and MNT Region Path.
+   * @param RegionColor Region border color.
+   * @param GlowColor for region boarder.
+   * @param fillColor for inside of regions boarder.
+   * Method to build the PNW and MNT States Region Path(s)
+   * Main tasks the method accomplishes: 
+   * ~Create Drop Shadow
+   * ~Create SVG Path objects
+   * ~Add listeners to SVG Path objects
+   * ~Add SVG Path objects (regions) to the StackPane container. 
+   * 
    */
   public void buildPNWAndMNTPath(Color RegionColor, Color GlowColor,
       Color fillColor)
@@ -489,24 +538,31 @@ public class BuildInteractiveRegions
 
     PNWAndMNTPath.setOnMousePressed((event) ->
     {
-    	if(!clicked)
-    	{
-    	styleRegionPaths(5, fillColor, 2);
-    	main.invokeOtherStage();
-    	statController.setRegionName("PWN and MNT States");
+      if (!clicked)
+      {
+        styleRegionPaths(5, fillColor, 2);
+        main.invokeOtherStage();
+        statController.setRegionName("PWN and MNT States");
         clicked = true;
         clickedRegion = 5;
-    	}
+      }
     });
     sp.getChildren().add(PNWAndMNTPath);
   }
-/**
- * 
- * @param RegionColor
- * @param GlowColor
- * @param fillColor
- * Build Northern Planes Region Path.
- */
+
+  /**
+   * 
+   * @param RegionColor Region border color.
+   * @param GlowColor for region boarder.
+   * @param fillColor for inside of regions boarder.
+   * Method to build the Northern Planes States Region Path(s)
+   * Main tasks the method accomplishes: 
+   * ~Create Drop Shadow
+   * ~Create SVG Path objects
+   * ~Add listeners to SVG Path objects
+   * ~Add SVG Path objects (regions) to the StackPane container. 
+   * 
+   */
   public void buildNorthernPlanesPath(Color RegionColor, Color GlowColor,
       Color fillColor)
   {
@@ -542,25 +598,31 @@ public class BuildInteractiveRegions
 
     northernPlanesPath.setOnMousePressed((event) ->
     {
-    	if(!clicked)
-    	{
-    	styleRegionPaths(6, fillColor, 2);
-    	main.invokeOtherStage();
-    	statController.setRegionName("Northen Planes States");
+      if (!clicked)
+      {
+        styleRegionPaths(6, fillColor, 2);
+        main.invokeOtherStage();
+        statController.setRegionName("Northen Planes States");
         clicked = true;
         clickedRegion = 6;
-    	}
+      }
     });
     sp.getChildren().add(northernPlanesPath);
   }
-/**
- * 
- * @param RegionColor
- * @param GlowColor
- * @param fillColor
- * 
- * Build HeartLands Region Path.
- */
+
+  /**
+   * 
+   * @param RegionColor Region border color.
+   * @param GlowColor for region boarder.
+   * @param fillColor for inside of regions boarder.
+   * Method to build the Heart Lands States Region Path(s)
+   * Main tasks the method accomplishes: 
+   * ~Create Drop Shadow
+   * ~Create SVG Path objects
+   * ~Add listeners to SVG Path objects
+   * ~Add SVG Path objects (regions) to the StackPane container. 
+   * 
+   */
   public void buildHeartLandsPath(Color RegionColor, Color GlowColor,
       Color fillColor)
   {
@@ -597,24 +659,31 @@ public class BuildInteractiveRegions
 
     heartLandsPath.setOnMousePressed((event) ->
     {
-    	if(!clicked)
-    	{
-    	styleRegionPaths(7, fillColor, 2);
-    	main.invokeOtherStage();
-    	statController.setRegionName("Heart Lands States");
+      if (!clicked)
+      {
+        styleRegionPaths(7, fillColor, 2);
+        main.invokeOtherStage();
+        statController.setRegionName("Heart Lands States");
         clicked = true;
         clickedRegion = 7;
-    	}
+      }
     });
     sp.getChildren().add(heartLandsPath);
   }
-/**
- * 
- * @param RegionColor
- * @param GlowColor
- * @param fillColor
- * Build Southern Planes and Delta States Region Path. 
- */
+
+  /**
+   * 
+   * @param RegionColor Region border color.
+   * @param GlowColor for region boarder.
+   * @param fillColor for inside of regions boarder.
+   * Method to build the Southern Planes and Delta States Region Path(s)
+   * Main tasks the method accomplishes: 
+   * ~Create Drop Shadow
+   * ~Create SVG Path objects
+   * ~Add listeners to SVG Path objects
+   * ~Add SVG Path objects (regions) to the StackPane container. 
+   * 
+   */
   public void buildSouthernPlanesDeltaStatesPath(Color RegionColor,
       Color GlowColor, Color fillColor)
   {
@@ -652,24 +721,31 @@ public class BuildInteractiveRegions
 
     southernPlanesDeltaStatesPath.setOnMousePressed((event) ->
     {
-    	if(!clicked)
-    	{
-    	styleRegionPaths(8, fillColor, 2);
-    	main.invokeOtherStage();
-    	statController.setRegionName("Southen Planes and Delta States");
+      if (!clicked)
+      {
+        styleRegionPaths(8, fillColor, 2);
+        main.invokeOtherStage();
+        statController.setRegionName("Southen Planes and Delta States");
         clicked = true;
         clickedRegion = 8;
-    	}
+      }
     });
     sp.getChildren().add(southernPlanesDeltaStatesPath);
   }
-/**
- * 
- * @param RegionColor
- * @param GlowColor
- * @param fillColor
- * Build Southeast Region Path. 
- */
+
+  /**
+   * 
+   * @param RegionColor Region border color.
+   * @param GlowColor for region boarder.
+   * @param fillColor for inside of regions boarder.
+   * Method to build the South Eastern States Region Path(s)
+   * Main tasks the method accomplishes: 
+   * ~Create Drop Shadow
+   * ~Create SVG Path objects
+   * ~Add listeners to SVG Path objects
+   * ~Add SVG Path objects (regions) to the StackPane container. 
+   * 
+   */
   public void buildSoutheastPath(Color RegionColor, Color GlowColor,
       Color fillColor)
   {
@@ -705,24 +781,31 @@ public class BuildInteractiveRegions
 
     southeastPath.setOnMousePressed((event) ->
     {
-    	if(!clicked)
-    	{
-    	styleRegionPaths(9, fillColor, 2);
-    	main.invokeOtherStage();
-    	statController.setRegionName("South Eastern States");
+      if (!clicked)
+      {
+        styleRegionPaths(9, fillColor, 2);
+        main.invokeOtherStage();
+        statController.setRegionName("South Eastern States");
         clicked = true;
         clickedRegion = 9;
-    	}
+      }
     });
     sp.getChildren().add(southeastPath);
   }
-/**
- * 
- * @param RegionColor
- * @param GlowColor
- * @param fillColor
- * Build Northern Crescent Region Path. 
- */
+
+  /**
+   * 
+   * @param RegionColor Region border color.
+   * @param GlowColor for region boarder.
+   * @param fillColor for inside of regions boarder.
+   * Method to build the Northern Crescent States Region Path(s)
+   * Main tasks the method accomplishes: 
+   * ~Create Drop Shadow
+   * ~Create SVG Path objects
+   * ~Add listeners to SVG Path objects
+   * ~Add SVG Path objects (regions) to the StackPane container. 
+   * 
+   */
   public void buildNorthernCrescentPath(Color RegionColor, Color GlowColor,
       Color fillColor)
   {
@@ -759,24 +842,31 @@ public class BuildInteractiveRegions
 
     northernCrescentPath.setOnMousePressed((event) ->
     {
-    	if(!clicked)
-    	{
-    	styleRegionPaths(10, fillColor, 2);
-    	main.invokeOtherStage();
-    	statController.setRegionName("Northen Crescent States");
+      if (!clicked)
+      {
+        styleRegionPaths(10, fillColor, 2);
+        main.invokeOtherStage();
+        statController.setRegionName("Northen Crescent States");
         clicked = true;
         clickedRegion = 10;
-    	}
+      }
     });
     sp.getChildren().add(northernCrescentPath);
   }
-/**
- * 
- * @param RegionColor
- * @param GlowColor
- * @param fillColor
- * Build Middle East Region Path. 
- */
+
+  /**
+   * 
+   * @param RegionColor Region border color.
+   * @param GlowColor for region boarder.
+   * @param fillColor for inside of regions boarder.
+   * Method to build the Middle East's Region Path(s)
+   * Main tasks the method accomplishes: 
+   * ~Create Drop Shadow
+   * ~Create SVG Path objects
+   * ~Add listeners to SVG Path objects
+   * ~Add SVG Path objects (regions) to the StackPane container. 
+   * 
+   */
   public void buildMiddleEastPath(Color RegionColor, Color GlowColor,
       Color fillColor)
   {
@@ -825,26 +915,33 @@ public class BuildInteractiveRegions
     });
 
     middleEastMainPath.setOnMousePressed((event) ->
-    { 
-    	if(!clicked)
-    	{
-    	styleRegionPaths(11, fillColor, 2);
-    	main.invokeOtherStage();
-    	statController.setRegionName("Middle East");
+    {
+      if (!clicked)
+      {
+        styleRegionPaths(11, fillColor, 2);
+        main.invokeOtherStage();
+        statController.setRegionName("Middle East");
         clicked = true;
         clickedRegion = 11;
-    	}
+      }
     });
 
     sp.getChildren().addAll(middleEastMainPath, middleEastSubPath);
   }
-/**
- * 
- * @param RegionColor
- * @param GlowColor
- * @param fillColor
- * Build Central Asia Region Path.
- */
+
+  /**
+   * 
+   * @param RegionColor Region border color.
+   * @param GlowColor for region boarder.
+   * @param fillColor for inside of regions boarder.
+   * Method to build Central Asia's Region Path(s)
+   * Main tasks the method accomplishes: 
+   * ~Create Drop Shadow
+   * ~Create SVG Path objects
+   * ~Add listeners to SVG Path objects
+   * ~Add SVG Path objects (regions) to the StackPane container. 
+   * 
+   */
   public void buildCentralAsiaPath(Color RegionColor, Color GlowColor,
       Color fillColor)
   {
@@ -881,25 +978,31 @@ public class BuildInteractiveRegions
 
     centralAsiaPath.setOnMousePressed((event) ->
     {
-    	if(!clicked)
-    	{
-    	styleRegionPaths(12, fillColor, 2);
-    	main.invokeOtherStage();
-    	statController.setRegionName("Central Asia");
+      if (!clicked)
+      {
+        styleRegionPaths(12, fillColor, 2);
+        main.invokeOtherStage();
+        statController.setRegionName("Central Asia");
         clicked = true;
         clickedRegion = 12;
-    	}
- 
+      }
+
     });
     sp.getChildren().add(centralAsiaPath);
   }
 
   /**
    * 
-   * @param RegionColor
-   * @param GlowColor
-   * @param fillColor
-   * Build South Asia Region Path. 
+   * @param RegionColor Region border color.
+   * @param GlowColor for region boarder.
+   * @param fillColor for inside of regions boarder.
+   * Method to build South Asia's Region Path(s)
+   * Main tasks the method accomplishes: 
+   * ~Create Drop Shadow
+   * ~Create SVG Path objects
+   * ~Add listeners to SVG Path objects
+   * ~Add SVG Path objects (regions) to the StackPane container. 
+   * 
    */
   public void buildSouthAsiaPath(Color RegionColor, Color GlowColor,
       Color fillColor)
@@ -911,9 +1014,9 @@ public class BuildInteractiveRegions
     southAsiaBoarderGlow.setColor(GlowColor);
     southAsiaBoarderGlow.setWidth(DEPTH);
     southAsiaBoarderGlow.setHeight(DEPTH);
-  
+
     SVGPath southAsiaMainPath = new SVGPath();
-    
+
     southAsiaMainPath.setFill(TRANSPARENT);
     southAsiaMainPath.setStroke(TRANSPARENT);
     southAsiaMainPath.setStrokeWidth(5.0);
@@ -951,24 +1054,31 @@ public class BuildInteractiveRegions
 
     southAsiaMainPath.setOnMousePressed((event) ->
     {
-    	if(!clicked)
-    	{
-    	styleRegionPaths(13, fillColor, 2);
-    	main.invokeOtherStage();
-    	statController.setRegionName("South Asia");
+      if (!clicked)
+      {
+        styleRegionPaths(13, fillColor, 2);
+        main.invokeOtherStage();
+        statController.setRegionName("South Asia");
         clicked = true;
         clickedRegion = 13;
-    	}
+      }
     });
 
     sp.getChildren().addAll(southAsiaMainPath, southAsiaSubPath);
   }
+
   /**
    * 
-   * @param RegionColor
-   * @param GlowColor
-   * @param fillColor
-   * Build Arctic America Region Path. 
+   * @param RegionColor Region border color.
+   * @param GlowColor for region boarder.
+   * @param fillColor for inside of regions boarder.
+   * Method to build Arctic Americas Region Path(s)
+   * Main tasks the method accomplishes: 
+   * ~Create Drop Shadow
+   * ~Create SVG Path objects
+   * ~Add listeners to SVG Path objects
+   * ~Add SVG Path objects (regions) to the StackPane container. 
+   * 
    */
   public void buildArcticAmericaPath(Color RegionColor, Color GlowColor,
       Color fillColor)
@@ -1055,8 +1165,6 @@ public class BuildInteractiveRegions
     arcticAmericaPaths.add(arcticAmericaSubPath3);
     arcticAmericaPaths.add(arcticAmericaSubPath4);
 
-    
-    
     arcticAmericaMainPath1.setOnMouseMoved(evt ->
     {
       styleRegionPaths(14, RegionColor, 1); // Change Stroke Color
@@ -1064,7 +1172,7 @@ public class BuildInteractiveRegions
     arcticAmericaMainPath1.setOnMouseExited(evt ->
     {
       styleRegionPaths(14, TRANSPARENT, 1); // Change Stroke Color
-    
+
     });
     arcticAmericaMainPath2.setOnMouseMoved(evt ->
     {
@@ -1079,40 +1187,44 @@ public class BuildInteractiveRegions
 
     arcticAmericaMainPath1.setOnMousePressed((event) ->
     {
-    	if(!clicked)
-    	{
-    	styleRegionPaths(14, fillColor, 2);
-    	main.invokeOtherStage();
-    	statController.setRegionName("Arctic America");
+      if (!clicked)
+      {
+        styleRegionPaths(14, fillColor, 2);
+        main.invokeOtherStage();
+        statController.setRegionName("Arctic America");
         clicked = true;
         clickedRegion = 14;
-    	}
+      }
     });
     arcticAmericaMainPath2.setOnMousePressed((event) ->
     {
-    	if(!clicked)
-    	{
-    	styleRegionPaths(14, fillColor, 2);
-    	main.invokeOtherStage();
-    	statController.setRegionName("Arctic America");
+      if (!clicked)
+      {
+        styleRegionPaths(14, fillColor, 2);
+        main.invokeOtherStage();
+        statController.setRegionName("Arctic America");
         clicked = true;
         clickedRegion = 14;
-    	}
+      }
     });
     sp.getChildren().addAll(arcticAmericaMainPath1, arcticAmericaMainPath2,
         arcticAmericaSubPath1, arcticAmericaSubPath2, arcticAmericaSubPath3,
         arcticAmericaSubPath4);
   }
-  
-  
-  
-/**
- * 
- * @param RegionColor
- * @param GlowColor
- * @param fillColor
- * Build Russia Caucaus Region Path. 
- */
+
+  /**
+   * 
+   * @param RegionColor Region border color.
+   * @param GlowColor for region boarder.
+   * @param fillColor for inside of regions boarder.
+   * Method to build the Russian Caucaus Region Path(s)
+   * Main tasks the method accomplishes: 
+   * ~Create Drop Shadow
+   * ~Create SVG Path objects
+   * ~Add listeners to SVG Path objects
+   * ~Add SVG Path objects (regions) to the StackPane container. 
+   * 
+   */
   public void buildRussiaCaucausPath(Color RegionColor, Color GlowColor,
       Color fillColor)
   {
@@ -1188,7 +1300,7 @@ public class BuildInteractiveRegions
 
     russiaCaucausMainPath.setOnMouseMoved(evt ->
     {
-      
+
       styleRegionPaths(15, RegionColor, 1); // Change Stroke Color
     });
 
@@ -1198,27 +1310,34 @@ public class BuildInteractiveRegions
     });
 
     russiaCaucausMainPath.setOnMousePressed((event) ->
-    {    	
-    	if(!clicked)
-    	{
-    	styleRegionPaths(15, fillColor, 2);
-    	main.invokeOtherStage();
-    	statController.setRegionName("Russia Caucaus");
+    {
+      if (!clicked)
+      {
+        styleRegionPaths(15, fillColor, 2);
+        main.invokeOtherStage();
+        statController.setRegionName("Russia Caucaus");
         clicked = true;
         clickedRegion = 15;
-    	}
+      }
     });
     sp.getChildren().addAll(russiaCaucausMainPath, russiaCaucausSubPath1,
         russiaCaucausSubPath2, russiaCaucausSubPath3, russiaCaucausSubPath4);
 
   }
-/**
- * 
- * @param RegionColor
- * @param GlowColor
- * @param fillColor
- * Build Europe Region Path. 
- */
+
+  /**
+   * 
+   * @param RegionColor Region border color.
+   * @param GlowColor for region boarder.
+   * @param fillColor for inside of regions boarder.
+   * Method to build Europe's Region Path(s)
+   * Main tasks the method accomplishes: 
+   * ~Create Drop Shadow
+   * ~Create SVG Path objects
+   * ~Add listeners to SVG Path objects
+   * ~Add SVG Path objects (regions) to the StackPane container. 
+   * 
+   */
   public void buildEuropePath(Color RegionColor, Color GlowColor,
       Color fillColor)
   {
@@ -1358,58 +1477,65 @@ public class BuildInteractiveRegions
 
     europeMainPath.setOnMousePressed((event) ->
     {
-    	
-    	if(!clicked)
-    	{
-    	styleRegionPaths(16, fillColor, 2);
-    	main.invokeOtherStage();
-    	statController.setRegionName("Europe");
+
+      if (!clicked)
+      {
+        styleRegionPaths(16, fillColor, 2);
+        main.invokeOtherStage();
+        statController.setRegionName("Europe");
         clicked = true;
         clickedRegion = 16;
-    	}
+      }
     });
     europeSubPath1.setOnMousePressed((event) ->
     {
-    	if(!clicked)
-    	{
-    	styleRegionPaths(16, fillColor, 2);
-    	main.invokeOtherStage();
-    	statController.setRegionName("Europe");
+      if (!clicked)
+      {
+        styleRegionPaths(16, fillColor, 2);
+        main.invokeOtherStage();
+        statController.setRegionName("Europe");
         clicked = true;
         clickedRegion = 16;
-    	}
+      }
     });
     europeSubPath2.setOnMousePressed((event) ->
     {
-    	if(!clicked)
-    	{
-    	styleRegionPaths(16, fillColor, 2);
-    	main.invokeOtherStage();
-    	statController.setRegionName("Europe");
+      if (!clicked)
+      {
+        styleRegionPaths(16, fillColor, 2);
+        main.invokeOtherStage();
+        statController.setRegionName("Europe");
         clicked = true;
         clickedRegion = 16;
-    	}
+      }
     });
     europeSubPath3.setOnMousePressed((event) ->
     {
-    	if(!clicked)
-    	{
-    	styleRegionPaths(16, fillColor, 2);
-    	main.invokeOtherStage();
-    	statController.setRegionName("Europe");
+      if (!clicked)
+      {
+        styleRegionPaths(16, fillColor, 2);
+        main.invokeOtherStage();
+        statController.setRegionName("Europe");
         clicked = true;
         clickedRegion = 16;
-    	}
+      }
     });
     sp.getChildren().addAll(europeMainPath, europeSubPath1, europeSubPath2,
         europeSubPath3, europeSubPath4, europeSubPath5, europeSubPath6);
   }
+
   /**
    * 
-   * @param RegionColor
-   * @param GlowColor
-   * @param fillColor
-   * Build East Asia Region Path. 
+   * @param RegionColor Region border color.
+   * @param GlowColor for region boarder.
+   * @param fillColor for inside of regions boarder.
+   * Method to build East Asia's Region Path(s)
+   * Main tasks the method accomplishes: 
+   * ~Create Drop Shadow
+   * ~Create SVG Path objects
+   * ~Add listeners to SVG Path objects
+   * ~Add SVG Path objects (regions) to the StackPane container. 
+   * 
    */
   public void buildEastAsiaPath(Color RegionColor, Color GlowColor,
       Color fillColor)
@@ -1504,48 +1630,55 @@ public class BuildInteractiveRegions
 
     eastAsiaMainPath.setOnMousePressed((event) ->
     {
-    	if(!clicked)
-    	{
-    	styleRegionPaths(17, fillColor, 2);
-    	main.invokeOtherStage();
-    	statController.setRegionName("East Asia");
+      if (!clicked)
+      {
+        styleRegionPaths(17, fillColor, 2);
+        main.invokeOtherStage();
+        statController.setRegionName("East Asia");
         clicked = true;
         clickedRegion = 17;
-    	}
+      }
     });
 
     eastAsiaSubPath1.setOnMousePressed((event) ->
     {
-    	if(!clicked)
-    	{
-    	styleRegionPaths(17, fillColor, 2);
-    	main.invokeOtherStage();
-    	statController.setRegionName("East Asia");
+      if (!clicked)
+      {
+        styleRegionPaths(17, fillColor, 2);
+        main.invokeOtherStage();
+        statController.setRegionName("East Asia");
         clicked = true;
         clickedRegion = 17;
-    	}
+      }
     });
 
     eastAsiaSubPath2.setOnMousePressed((event) ->
     {
-    	if(!clicked)
-    	{
-    	styleRegionPaths(17, fillColor, 2);
-    	main.invokeOtherStage();
-    	statController.setRegionName("East Asia");
+      if (!clicked)
+      {
+        styleRegionPaths(17, fillColor, 2);
+        main.invokeOtherStage();
+        statController.setRegionName("East Asia");
         clicked = true;
         clickedRegion = 17;
-    	}
+      }
     });
     sp.getChildren().addAll(eastAsiaMainPath, eastAsiaSubPath1,
         eastAsiaSubPath2, eastAsiaSubPath3);
   }
+
   /**
    * 
-   * @param RegionColor
-   * @param GlowColor
-   * @param fillColor
-   * Build Oceania Region path. 
+   * @param RegionColor Region border color.
+   * @param GlowColor for region boarder.
+   * @param fillColor for inside of regions boarder.
+   * Method to build the Oceania Pact's Region Path(s)
+   * Main tasks the method accomplishes: 
+   * ~Create Drop Shadow
+   * ~Create SVG Path objects
+   * ~Add listeners to SVG Path objects
+   * ~Add SVG Path objects (regions) to the StackPane container. 
+   * 
    */
   public void buildOceaniaPath(Color RegionColor, Color GlowColor,
       Color fillColor)
@@ -1814,47 +1947,47 @@ public class BuildInteractiveRegions
 
     oceaniaSubPath1.setOnMousePressed((event) ->
     {
-    	if(!clicked)
-    	{
-    	styleRegionPaths(18, fillColor, 2);
-    	main.invokeOtherStage();
-    	statController.setRegionName("Oceania Pact");
+      if (!clicked)
+      {
+        styleRegionPaths(18, fillColor, 2);
+        main.invokeOtherStage();
+        statController.setRegionName("Oceania Pact");
         clicked = true;
         clickedRegion = 18;
-    	}
+      }
     });
     oceaniaSubPath2.setOnMousePressed((event) ->
     {
-    	if(!clicked)
-    	{
-    	styleRegionPaths(18, fillColor, 2);
-    	main.invokeOtherStage();
-    	statController.setRegionName("Oceania Pact");
+      if (!clicked)
+      {
+        styleRegionPaths(18, fillColor, 2);
+        main.invokeOtherStage();
+        statController.setRegionName("Oceania Pact");
         clicked = true;
         clickedRegion = 18;
-    	}
+      }
     });
     oceaniaSubPath4.setOnMousePressed((event) ->
     {
-    	if(!clicked)
-    	{
-    	styleRegionPaths(18, fillColor, 2);
-    	main.invokeOtherStage();
-    	statController.setRegionName("Oceania Pact");
+      if (!clicked)
+      {
+        styleRegionPaths(18, fillColor, 2);
+        main.invokeOtherStage();
+        statController.setRegionName("Oceania Pact");
         clicked = true;
         clickedRegion = 18;
-    	}
+      }
     });
     oceaniaMainPath.setOnMousePressed((event) ->
     {
-    	if(!clicked)
-    	{
-    	styleRegionPaths(18, fillColor, 2);
-    	main.invokeOtherStage();
-    	statController.setRegionName("Oceania Pact");
+      if (!clicked)
+      {
+        styleRegionPaths(18, fillColor, 2);
+        main.invokeOtherStage();
+        statController.setRegionName("Oceania Pact");
         clicked = true;
         clickedRegion = 18;
-    	}
+      }
     });
     sp.getChildren().addAll(oceaniaMainPath, oceaniaSubPath1, oceaniaSubPath2,
         oceaniaSubPath3, oceaniaSubPath4, oceaniaSubPath5, oceaniaSubPath6,
@@ -1862,22 +1995,20 @@ public class BuildInteractiveRegions
         oceaniaSubPath11, oceaniaSubPath12, oceaniaSubPath13, oceaniaSubPath14,
         oceaniaSubPath15, oceaniaSubPath16, oceaniaSubPath17);
   }
- 
+
   public void setStatController(FXStatisticalDisplaysController statController)
   {
-	  this.statController = statController;
+    this.statController = statController;
   }
-   
-  
+
   /**
    * 
-   * @param Region
-   * @param color
-   * @param mode
-   *  Method to change styles of a region e.g the boarder color or fill color,
-   *  this method allows to get rid of (some..) repetitive code. 
-   *          Let Mode = 1 represent setting region paths stroke Let Mode = 2
-   *          represent setting region paths fill
+   * @param Region - Number corresponding to the region clicked.
+   * @param color - The color that the boarder or whole region will be colored
+   * @param mode - The mode (e.g mode 1 is boarder change and mode 2 is whole region
+   * change.)
+   *          
+   * Method to change styles of a region e.g the boarder color or fill
    * 
    */
   private void styleRegionPaths(int Region, Color color, int mode)
@@ -1895,7 +2026,7 @@ public class BuildInteractiveRegions
       if (mode == 2)
       {
         for (SVGPath path : africaPaths)
-          
+
         {
           path.setFill(color);
         }
