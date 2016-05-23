@@ -25,4 +25,5 @@ on one of the regions.
 
     Please contact me if you have any questions or wish to use elements of this
     program. 
-    **Contact: cseely@unm.edu**
+
+**Contact: cseely@unm.edu**
