@@ -66,19 +66,31 @@ public class BuildInteractiveRegions
   private ArrayList<SVGPath> europePaths = new ArrayList<>();;
   private ArrayList<SVGPath> eastAsiaPaths = new ArrayList<>();;
   private ArrayList<SVGPath> oceaniaPaths = new ArrayList<>();;
-
+  
   public int clickedRegion;
   
   private SVGPaths SVG = new SVGPaths();
   StackPane sp;
+  MapBase main;
+  FXStatisticalDisplaysController statController;
   public boolean clicked;
   
-  BuildInteractiveRegions(StackPane sp)
+  BuildInteractiveRegions(StackPane sp, MapBase main)
   {
+	this.main = main;
     this.sp = sp; 
     this.clicked = false;
     this.clickedRegion = 0;
   }
+  
+  
+  public void unLightUpRegion()
+  {
+	  clicked = false;
+	  styleRegionPaths(clickedRegion, TRANSPARENT, 1); // Change Fill Color
+     styleRegionPaths(clickedRegion, TRANSPARENT, 2); // Change Fill Color
+  }
+  
   
   public void update()
   {
@@ -152,6 +164,14 @@ public class BuildInteractiveRegions
 
     africaMainPath.setOnMousePressed((event) ->
     {
+    	if(!clicked)
+    	{
+    	styleRegionPaths(1, fillColor, 2);
+    	main.invokeOtherStage();
+    	statController.setRegionName("Sub-Saharan Africa");
+        clicked = true;
+        clickedRegion = 1;
+    	}
     //  if(gui.getPopupManager().isOpen()==null)
      // {
     //  clicked = true;
@@ -169,7 +189,14 @@ public class BuildInteractiveRegions
     });
     africaSubPath.setOnMousePressed((event) ->
     {
-
+    	if(!clicked)
+    	{
+    	styleRegionPaths(1, fillColor, 2);
+    	main.invokeOtherStage();
+    	statController.setRegionName("Sub-Saharan Africa");
+        clicked = true;
+        clickedRegion = 1;
+    	}
       // TODO: Have Africa's Regional Statics be displayed.
     //  styleRegionPaths(1, fillColor, 2); // Change Fill Color
     });
@@ -230,17 +257,14 @@ public class BuildInteractiveRegions
 
     southAmericaPath.setOnMousePressed((event) ->
     {
-//      if(gui.getPopupManager().isOpen()==null)
-//      {
-//      clicked = true;
-//      gui.getPopupManager().toggleGraphDisplay();
-//      gui.getGraphManager().setRegionName("South America");
-//     // gui.getDraftLayout().getTickerReel().addMessage("South America, Population: " + gui.getGraphManager().getPopulation(9));
-//      gui.getGraphManager().setRegionNum(9);
-//      clickedRegion = 2;
-//      gui.getDraftLayout().getGraphDisplay().setDataVisMode(0);
-//      styleRegionPaths(2, fillColor, 2); // Change Fill Color
-//      }
+    	if(!clicked)
+    	{
+    	styleRegionPaths(2, fillColor, 2);
+    	main.invokeOtherStage();
+    	statController.setRegionName("South America");
+        clicked = true;
+        clickedRegion = 2;
+    	}
 
     });
 
@@ -390,6 +414,14 @@ public class BuildInteractiveRegions
 
     middleAmericaMainPath.setOnMousePressed((event) ->
     {
+    	if(!clicked)
+    	{
+    	styleRegionPaths(3, fillColor, 2);
+    	main.invokeOtherStage();
+    	statController.setRegionName("Middle America");
+        clicked = true;
+        clickedRegion = 3;
+    	}
 //      if(gui.getPopupManager().isOpen()==null)
 //      {
 //      clicked = true;
@@ -405,12 +437,28 @@ public class BuildInteractiveRegions
     });
     middleAmericaLargeSubPath1.setOnMousePressed((event) ->
     {
+    	if(!clicked)
+    	{
+    	styleRegionPaths(3, fillColor, 2);
+    	main.invokeOtherStage();
+    	statController.setRegionName("Middle America");
+        clicked = true;
+        clickedRegion = 3;
+    	}
      // System.out.println("Trigger Middle American Regional Stats");
   //    styleRegionPaths(3, fillColor, 2); // Change Fill Color
       // TODO: Have Middle America's Regional Statics be displayed.
     });
     middleAmericaLargeSubPath2.setOnMousePressed((event) ->
     {
+    	if(!clicked)
+    	{
+    	styleRegionPaths(3, fillColor, 2);
+    	main.invokeOtherStage();
+    	statController.setRegionName("Middle America");
+        clicked = true;
+        clickedRegion = 3;
+    	}
     //  System.out.println("Trigger Middle American Regional Stats");
    //   styleRegionPaths(3, fillColor, 2); // Change Fill Color
       // TODO: Have Middle America's Regional Statics be displayed.
@@ -481,6 +529,14 @@ public class BuildInteractiveRegions
 
     californiaPath.setOnMousePressed((event) ->
     {
+    	if(!clicked)
+    	{
+    	styleRegionPaths(4, fillColor, 2);
+    	main.invokeOtherStage();
+    	statController.setRegionName("California");
+        clicked = true;
+        clickedRegion = 4;
+    	}
 //      if(gui.getPopupManager().isOpen()==null)
 //      {
 //      clicked = true;
@@ -547,6 +603,14 @@ public class BuildInteractiveRegions
 
     PNWAndMNTPath.setOnMousePressed((event) ->
     {
+    	if(!clicked)
+    	{
+    	styleRegionPaths(5, fillColor, 2);
+    	main.invokeOtherStage();
+    	statController.setRegionName("PWN and MNT States");
+        clicked = true;
+        clickedRegion = 5;
+    	}
 //      if(gui.getPopupManager().isOpen()==null)
 //      {
 //      clicked = true;
@@ -613,6 +677,14 @@ public class BuildInteractiveRegions
 
     northernPlanesPath.setOnMousePressed((event) ->
     {
+    	if(!clicked)
+    	{
+    	styleRegionPaths(6, fillColor, 2);
+    	main.invokeOtherStage();
+    	statController.setRegionName("Northen Planes States");
+        clicked = true;
+        clickedRegion = 6;
+    	}
 //      clicked = true;
 //      gui.getPopupManager().toggleGraphDisplay();;
 //      gui.getGraphManager().setRegionNum(2);
@@ -676,6 +748,14 @@ public class BuildInteractiveRegions
 
     heartLandsPath.setOnMousePressed((event) ->
     {
+    	if(!clicked)
+    	{
+    	styleRegionPaths(7, fillColor, 2);
+    	main.invokeOtherStage();
+    	statController.setRegionName("Heart Lands States");
+        clicked = true;
+        clickedRegion = 7;
+    	}
 //      if(gui.getPopupManager().isOpen()==null)
 //      {
 //      clicked = true;
@@ -744,6 +824,14 @@ public class BuildInteractiveRegions
 
     southernPlanesDeltaStatesPath.setOnMousePressed((event) ->
     {
+    	if(!clicked)
+    	{
+    	styleRegionPaths(8, fillColor, 2);
+    	main.invokeOtherStage();
+    	statController.setRegionName("Southen Planes and Delta States");
+        clicked = true;
+        clickedRegion = 8;
+    	}
 //      if(gui.getPopupManager().isOpen()==null)
 //      {
 //      clicked = true;
@@ -809,6 +897,14 @@ public class BuildInteractiveRegions
 
     southeastPath.setOnMousePressed((event) ->
     {
+    	if(!clicked)
+    	{
+    	styleRegionPaths(9, fillColor, 2);
+    	main.invokeOtherStage();
+    	statController.setRegionName("South Eastern States");
+        clicked = true;
+        clickedRegion = 9;
+    	}
 //      if(gui.getPopupManager().isOpen()==null)
 //      {
 //      clicked = true;
@@ -875,6 +971,14 @@ public class BuildInteractiveRegions
 
     northernCrescentPath.setOnMousePressed((event) ->
     {
+    	if(!clicked)
+    	{
+    	styleRegionPaths(10, fillColor, 2);
+    	main.invokeOtherStage();
+    	statController.setRegionName("Northen Crescent States");
+        clicked = true;
+        clickedRegion = 10;
+    	}
 //      if(gui.getPopupManager().isOpen()==null)
 //      {
 //      clicked = true;
@@ -953,6 +1057,14 @@ public class BuildInteractiveRegions
 
     middleEastMainPath.setOnMousePressed((event) ->
     { 
+    	if(!clicked)
+    	{
+    	styleRegionPaths(11, fillColor, 2);
+    	main.invokeOtherStage();
+    	statController.setRegionName("Middle East");
+        clicked = true;
+        clickedRegion = 11;
+    	}
 //      if(gui.getPopupManager().isOpen()==null)
 //      {
 //      clicked = true;
@@ -1018,6 +1130,14 @@ public class BuildInteractiveRegions
 
     centralAsiaPath.setOnMousePressed((event) ->
     {
+    	if(!clicked)
+    	{
+    	styleRegionPaths(12, fillColor, 2);
+    	main.invokeOtherStage();
+    	statController.setRegionName("Central Asia");
+        clicked = true;
+        clickedRegion = 12;
+    	}
 //      if(gui.getPopupManager().isOpen()==null)
 //      {
 //      clicked = true;
@@ -1102,6 +1222,14 @@ public class BuildInteractiveRegions
 
     southAsiaMainPath.setOnMousePressed((event) ->
     {
+    	if(!clicked)
+    	{
+    	styleRegionPaths(13, fillColor, 2);
+    	main.invokeOtherStage();
+    	statController.setRegionName("South Asia");
+        clicked = true;
+        clickedRegion = 13;
+    	}
 //      if(gui.getPopupManager().isOpen()==null)
 //      {
 //      clicked = true;
@@ -1240,6 +1368,14 @@ public class BuildInteractiveRegions
 
     arcticAmericaMainPath1.setOnMousePressed((event) ->
     {
+    	if(!clicked)
+    	{
+    	styleRegionPaths(14, fillColor, 2);
+    	main.invokeOtherStage();
+    	statController.setRegionName("Arctic America");
+        clicked = true;
+        clickedRegion = 14;
+    	}
 //      if(gui.getPopupManager().isOpen()==null)
 //      {
 //      //  gui.getDraftLayout().getTickerReel().addMessage("Arctic America, Population: " + gui.getGraphManager().getPopulation(7));
@@ -1257,6 +1393,14 @@ public class BuildInteractiveRegions
     });
     arcticAmericaMainPath2.setOnMousePressed((event) ->
     {
+    	if(!clicked)
+    	{
+    	styleRegionPaths(14, fillColor, 2);
+    	main.invokeOtherStage();
+    	statController.setRegionName("Arctic America");
+        clicked = true;
+        clickedRegion = 14;
+    	}
      // System.out.println("Trigger South Asia's Regional Stats");
      // styleRegionPaths(14, fillColor, 2); // Change Fill Color
       // TODO: Have South Asia's Regional Statics be displayed.
@@ -1373,6 +1517,15 @@ public class BuildInteractiveRegions
 
     russiaCaucausMainPath.setOnMousePressed((event) ->
     {
+    	
+    	if(!clicked)
+    	{
+    	styleRegionPaths(15, fillColor, 2);
+    	main.invokeOtherStage();
+    	statController.setRegionName("Russia Caucaus");
+        clicked = true;
+        clickedRegion = 15;
+    	}
 //      if(gui.getPopupManager().isOpen()==null)
 //      {
 //      clicked = true;
@@ -1544,6 +1697,15 @@ public class BuildInteractiveRegions
 
     europeMainPath.setOnMousePressed((event) ->
     {
+    	
+    	if(!clicked)
+    	{
+    	styleRegionPaths(16, fillColor, 2);
+    	main.invokeOtherStage();
+    	statController.setRegionName("Europe");
+        clicked = true;
+        clickedRegion = 16;
+    	}
 //      if(gui.getPopupManager().isOpen()==null)
 //      {
 //      //  System.out.println("here1");
@@ -1570,18 +1732,42 @@ public class BuildInteractiveRegions
 
     europeSubPath1.setOnMousePressed((event) ->
     {
+    	if(!clicked)
+    	{
+    	styleRegionPaths(16, fillColor, 2);
+    	main.invokeOtherStage();
+    	statController.setRegionName("Europe");
+        clicked = true;
+        clickedRegion = 16;
+    	}
      // System.out.println("Trigger Europes Regional Stats");
   //    styleRegionPaths(16, fillColor, 2); // Change Fill Color
       // TODO: Have Eurpoe's Regional Statics be displayed.
     });
     europeSubPath2.setOnMousePressed((event) ->
     {
+    	if(!clicked)
+    	{
+    	styleRegionPaths(16, fillColor, 2);
+    	main.invokeOtherStage();
+    	statController.setRegionName("Europe");
+        clicked = true;
+        clickedRegion = 16;
+    	}
      // System.out.println("Trigger Europes Regional Stats");
     //  styleRegionPaths(16, fillColor, 2); // Change Fill Color
       // TODO: Have Eurpoe's Regional Statics be displayed.
     });
     europeSubPath3.setOnMousePressed((event) ->
     {
+    	if(!clicked)
+    	{
+    	styleRegionPaths(16, fillColor, 2);
+    	main.invokeOtherStage();
+    	statController.setRegionName("Europe");
+        clicked = true;
+        clickedRegion = 16;
+    	}
      // System.out.println("Trigger Europes Regional Stats");
     //  styleRegionPaths(16, fillColor, 2); // Change Fill Color
       // TODO: Have Eurpoe's Regional Statics be displayed.
@@ -1704,6 +1890,14 @@ public class BuildInteractiveRegions
 
     eastAsiaMainPath.setOnMousePressed((event) ->
     {
+    	if(!clicked)
+    	{
+    	styleRegionPaths(17, fillColor, 2);
+    	main.invokeOtherStage();
+    	statController.setRegionName("East Asia");
+        clicked = true;
+        clickedRegion = 17;
+    	}
 //      if(gui.getPopupManager().isOpen()==null)
 //      {
 //      clicked = true;
@@ -1727,6 +1921,14 @@ public class BuildInteractiveRegions
     });
     eastAsiaSubPath1.setOnMousePressed((event) ->
     {
+    	if(!clicked)
+    	{
+    	styleRegionPaths(17, fillColor, 2);
+    	main.invokeOtherStage();
+    	statController.setRegionName("East Asia");
+        clicked = true;
+        clickedRegion = 17;
+    	}
     //  System.out.println("Trigger East Asia Regional Stats");
       // TODO: Have East Asia's Regional Statics be displayed.
      // styleRegionPaths(17, fillColor, 2); // Change Fill Color
@@ -1739,6 +1941,14 @@ public class BuildInteractiveRegions
 
     eastAsiaSubPath2.setOnMousePressed((event) ->
     {
+    	if(!clicked)
+    	{
+    	styleRegionPaths(17, fillColor, 2);
+    	main.invokeOtherStage();
+    	statController.setRegionName("East Asia");
+        clicked = true;
+        clickedRegion = 17;
+    	}
      // System.out.println("Trigger East Asia Regional Stats");
       // TODO: Have East Asia's Regional Statics be displayed.
    //   styleRegionPaths(17, fillColor, 2); // Change Fill Color
@@ -2025,6 +2235,14 @@ public class BuildInteractiveRegions
 
     oceaniaSubPath1.setOnMousePressed((event) ->
     {
+    	if(!clicked)
+    	{
+    	styleRegionPaths(18, fillColor, 2);
+    	main.invokeOtherStage();
+    	statController.setRegionName("Oceania Pact");
+        clicked = true;
+        clickedRegion = 18;
+    	}
     //  System.out.println("Trigger Oceania Regional Stats");
       // TODO: Have Oceania's Regional Statics be displayed.
      // styleRegionPaths(18, fillColor, 2); // Change Fill Color
@@ -2037,6 +2255,14 @@ public class BuildInteractiveRegions
 
     oceaniaSubPath2.setOnMousePressed((event) ->
     {
+    	if(!clicked)
+    	{
+    	styleRegionPaths(18, fillColor, 2);
+    	main.invokeOtherStage();
+    	statController.setRegionName("Oceania Pact");
+        clicked = true;
+        clickedRegion = 18;
+    	}
      // System.out.println("Trigger Oceania Regional Stats");
       // TODO: Have Oceania's Regional Statics be displayed.
    //   styleRegionPaths(18, fillColor, 2); // Change Fill Color
@@ -2049,6 +2275,14 @@ public class BuildInteractiveRegions
 
     oceaniaSubPath4.setOnMousePressed((event) ->
     {
+    	if(!clicked)
+    	{
+    	styleRegionPaths(18, fillColor, 2);
+    	main.invokeOtherStage();
+    	statController.setRegionName("Oceania Pact");
+        clicked = true;
+        clickedRegion = 18;
+    	}
      // System.out.println("Trigger Oceania Regional Stats");
       // TODO: Have Oceania's Regional Statics be displayed.
     //  styleRegionPaths(18, fillColor, 2); // Change Fill Color
@@ -2061,6 +2295,14 @@ public class BuildInteractiveRegions
 
     oceaniaMainPath.setOnMousePressed((event) ->
     {
+    	if(!clicked)
+    	{
+    	styleRegionPaths(18, fillColor, 2);
+    	main.invokeOtherStage();
+    	statController.setRegionName("Oceania Pact");
+        clicked = true;
+        clickedRegion = 18;
+    	}
 //      if(gui.getPopupManager().isOpen()==null)
 //      {
 //      clicked = true;
@@ -2089,6 +2331,14 @@ public class BuildInteractiveRegions
         oceaniaSubPath15, oceaniaSubPath16, oceaniaSubPath17);
   }
 
+  
+  public void setStatController(FXStatisticalDisplaysController statController)
+  {
+	  this.statController = statController;
+  }
+  
+  
+  
   /**
    * 
    * @param Region

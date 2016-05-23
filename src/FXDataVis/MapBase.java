@@ -34,7 +34,7 @@ public class MapBase extends Application{
 	//@FXML Canvas canvas;
 	SVGPaths SVG = new SVGPaths();
 	//Get the map image. 
-	BuildInteractiveRegions regionBuilder = new BuildInteractiveRegions(stackPane);
+	BuildInteractiveRegions regionBuilder = new BuildInteractiveRegions(stackPane,this);
 	Image mapImage = (new Image(getClass().getResourceAsStream("/FXDataVis/map.png")));
 	ImageView map = new ImageView(mapImage);	
 
@@ -96,13 +96,16 @@ public class MapBase extends Application{
 		try {
 			Stage newStage = new Stage();
 			//Make the stage transparent. 
-			newStage.initStyle(StageStyle.TRANSPARENT);			
-			Parent root = FXMLLoader.load(getClass().getResource("/GUIandDataVisTeamTestPackage/DataVis.fxml"));
+			newStage.initStyle(StageStyle.TRANSPARENT);		
+			
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FXDataVis/DataVis.fxml"));			
+			Parent root = fxmlLoader.load();
+			FXStatisticalDisplaysController statController = (FXStatisticalDisplaysController) fxmlLoader.getController();
+			statController.setRegionBuilder(regionBuilder);
 			Scene scene = new Scene(root);
 			//Again needed for making the window
 			//transparent. 
 			scene.setFill(Color.TRANSPARENT);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			newStage.setScene(scene);
 			newStage.show();
 		} catch(Exception e) {
