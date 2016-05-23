@@ -4,9 +4,9 @@ package FXDataVis;
  * 
  * @Author Christian Seely 
  * 
- * This holds the arrays containing one to multiple SVG paths that
+ * This class holds arrays containing one to multiple SVG paths that
  * make up a region. Multiple SVG paths are needed for regions with
- * disjoint bodies. All SVG paths are created in an editor (InkScape) and
+ * disjoint bodies. All SVG paths were created in an editor (InkScape) and
  * exported as SVG Paths. 
  *
  */

@@ -18,10 +18,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
-
+/**
+ * 
+ * @author Christian Seely
+ *
+ */
 public class FXStatisticalDisplaysController {
 
 
@@ -31,8 +34,6 @@ public class FXStatisticalDisplaysController {
 	 
 	 BuildInteractiveRegions regionBuilder;
 	 
-	//These will be obtained via a setter method (or getter) once 
-	//integrated with the actual game. 
 	private ArrayList<Integer> past10YearsNetExports = new ArrayList<>();
 	private ArrayList<Integer> past10YearsNetImports = new ArrayList<>();
 	private ArrayList<Integer> past10YearsNetProduction = new ArrayList<>();
@@ -55,8 +56,7 @@ public class FXStatisticalDisplaysController {
 	@FXML StackedBarChart<String, Number> barChart =
 	        new StackedBarChart<String, Number>(xAxis, yAxis);
 
-	//NOTE: These values below are all just for testing and 
-	//will be obtained via the game flow once integrated. 
+
 	String bestCropName = "Citrus";
 	private int presentYear = 2010;
 	private int currentYearlyBestCropProduction = 7_035_514;
@@ -111,7 +111,7 @@ public class FXStatisticalDisplaysController {
 		
 		pieChart.getStylesheets().add(getClass().getResource("/FXDataVis/pieChartCSS.css").toExternalForm());
 		
-		//Set initial region name (needs to be obtained from game once integrated)
+	
 		regionNameLabel.setTextFill(Color.web("#FFFFFF")); //white
 		leftButton.setVisible(false); //Can't go left. 
 	}
@@ -286,9 +286,7 @@ public class FXStatisticalDisplaysController {
 	/**
 	 * Set up a stacked bar chart to display the production
 	 * of the 'best' crop from the past 10 years (not in including current one)
-	 * the current ones yearly to date information is displayed below the chart.
-	 * Note the 'best' crop is hard coded in but again through integration
-	 * it will be defined programatically.
+	 * the current ones yearly to date information is displayed below the chart
 	 */
 	public void displayBestCropChart()
 	{
@@ -301,8 +299,6 @@ public class FXStatisticalDisplaysController {
 		 barChart.setLegendVisible(false); //Useless in our case. 
 		 barChart.getData().clear(); //Clear old data
 		 barChart.setTitle("Yearly Production of " +bestCropName+" Over Past 10 Years");
-		 //Set the values for testing (this information will obtained during 
-		 //game flow once integrated. 
 		 setTestValues1();
 		      int index = 0;
 		      //Create the series (each series is bar in our case) with
@@ -334,8 +330,6 @@ public class FXStatisticalDisplaysController {
 		 barChart.setAnimated(true);
 		 barChart.getData().clear();
 		 barChart.setTitle("Net Yearly Regional Exports from the Past 10 Years");
-		 //Set the values for testing (this information will obtained during 
-		 //game flow once integrated. 
 		 setTestValues2();
 		      int index = 0;
 		      //Create the series (each series is bar in our case) with
@@ -366,8 +360,6 @@ public class FXStatisticalDisplaysController {
 		 barChart.setAnimated(true);
 		 barChart.getData().clear();
 		 barChart.setTitle("Net Yearly Regional Imports from the Past 10 Years");
-		 //Set the values for testing (this information will obtained during 
-		 //game flow once integrated. 
 		 setTestValues3();
 		      int index = 0;
 		      //Create the series (each series is bar in our case) with
@@ -398,8 +390,6 @@ public class FXStatisticalDisplaysController {
 		 barChart.setAnimated(true);
 		 barChart.getData().clear();
 		 barChart.setTitle("Net Yearly Regional Production from the Past 10 Years");
-		 //Set the values for testing (this information will obtained during 
-		 //game flow once integrated
 		 setTestValues4();
 		      int index = 0;
 		      //Create the series (each series is bar in our case) with
@@ -430,8 +420,6 @@ public class FXStatisticalDisplaysController {
 		 barChart.setAnimated(true);
 		 barChart.getData().clear();
 		 barChart.setTitle("Net Regional Domestic Consumption from the Past 10 Years");
-		 //Set the values for testing (this information will obtained during 
-		 //game flow once integrated
 		 setTestValues5();
 		      int index = 0;
 		      //Create the series (each series is bar in our case) with
@@ -549,61 +537,7 @@ public class FXStatisticalDisplaysController {
 		past10YearsNetDomesticConsumption.add(18_123_152);
 
 	}
-
-	 /**
-	  * Note implemented yet as it's not integrated with the actual game
-	  * but this is how the information to be used for the visualization
-	  * could be updated. 
-	  */
-	 public void SetPast10YearsNetExports(ArrayList updatedList, int presentYear)
-	 {
-		 this.past10YearsNetExports = updatedList;
-		 this.presentYear=presentYear;
-		 
-	 }
-	 /**
-	  * Note implemented yet as it's not integrated with the actual game
-	  * but this is how the information to be used for the visualization
-	  * could be updated. 
-	  */
-	 public void SetPast10YearsNetImports(ArrayList updatedList,int presentYear)
-	 {
-		 this.past10YearsNetImports = updatedList;
-		 this.presentYear=presentYear;
-	 }
-	 /**
-	  * Note implemented yet as it's not integrated with the actual game
-	  * but this is how the information to be used for the visualization
-	  * could be updated. 
-	  */
-	 public void SetPast10YearsNetProduction(ArrayList updatedList,int presentYear)
-	 {
-		 this.past10YearsNetProduction = updatedList;
-		 this.presentYear=presentYear;
-	 }
-	 /**
-	  * Note implemented yet as it's not integrated with the actual game
-	  * but this is how the information to be used for the visualization
-	  * could be updated. 
-	  */
-	 public void SetPast10YearsBestCropProduction(ArrayList updatedList, String bestCrop,int presentYear)
-	 {
-		 this.past10YearsBestCropProduction = updatedList;
-		 this.bestCropName = bestCrop;
-		 this.presentYear=presentYear;
-	 }
-	 /**
-	  * Note implemented yet as it's not integrated with the actual game
-	  * but this is how the information to be used for the visualization
-	  * could be updated. 
-	  */
-	 public void SetPast10YearsDomesticConsumption(ArrayList updatedList, int presentYear)
-	 {
-		 this.past10YearsNetDomesticConsumption = updatedList;
-		 this.presentYear=presentYear;
-	 }
-	 
-	 
+ 
 	 public void setRegionBuilder(BuildInteractiveRegions regionBuilder)
 	 {
 		 this.regionBuilder = regionBuilder;

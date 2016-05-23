@@ -1,10 +1,6 @@
 package FXDataVis;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-
-import javax.swing.plaf.synth.SynthSeparatorUI;
-
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -12,60 +8,42 @@ import javafx.scene.shape.SVGPath;
 
 
 /**
+ * @author Christian Seely 
  * 
  * This class constructs all of the SVGPath objects that compose
  * of each region and place them on the correct location on the
  * world map. Note the Region colors, Region glow colors, region fill
- * colors, and region size are all customizable. Also each reason
- * as listeners associated with it which can tell when a mouse enters
+ * colors, and region size are all customizable. Also each region
+ * has listeners associated with it which can tell when a mouse enters
  * and leaves a region (some small islands that are part of a region
  * do not have listeners but if wanted they can be added). Also
- * if you click on the region it lights up and prints out that
- * it should trigger a pane showing the statistics (similar as to demo'ed in 
- * class )of the region to display (TODO).
+ * if you click on the region it lights up and displays the regional
+ * statistics.
  *
- * In case anyone is wondering why components of the tiles or lat/long number
- * were not used in the creation of the region boarders here is why:
- * 1. Using the Lat/Long values would required calculating which lat/long
- * value belongs to each region all on the clients side (this way does not
- * require that).
- * 2. The Lat/Long points would be many more data points and slower to render 
- * (this has much less data points)
- * 3. It's not just displaying the regions on the map that's important it's
- * having the ability to add listeners to them. So in some way those lat/long
- * points would have to be used to create some component that can have listeners
- * (The current way has a wide variety of listeners available to use)
- * 4. The Lat/Long point were being drawn using AWT which does not have the 
- * 'Styling' capabilities of JavaFX. (The current way can use the 'Styling'
- * capabilities of JavaFX)
- * 
- * But Note: The lat/long numbers will be needed for when crop heat maps are 
- * implemented but to create those the regional boarders don't matter so again
- * no extra calculations are needed on the clients side. 
  *
  */
 public class BuildInteractiveRegions
 {
   private final int DEPTH = 70;
   private final Color TRANSPARENT = Color.TRANSPARENT;
-  private ArrayList<SVGPath> africaPaths = new ArrayList<>();;
-  private ArrayList<SVGPath> southAmericaPaths = new ArrayList<>();;
-  private ArrayList<SVGPath> middleAmericaPaths = new ArrayList<>();;
-  private ArrayList<SVGPath> californiaPaths = new ArrayList<>();;
-  private ArrayList<SVGPath> PNWandMNTPaths = new ArrayList<>();;
-  private ArrayList<SVGPath> northernPlanesPaths = new ArrayList<>();;
-  private ArrayList<SVGPath> heartLandPaths = new ArrayList<>();;
-  private ArrayList<SVGPath> southernPlanesDeltaStatesPaths = new ArrayList<>();;
-  private ArrayList<SVGPath> southEastPaths = new ArrayList<>();;
-  private ArrayList<SVGPath> northernCrescentPaths = new ArrayList<>();;;
-  private ArrayList<SVGPath> middleEastPaths = new ArrayList<>();;
-  private ArrayList<SVGPath> southAsiaPaths = new ArrayList<>();;
-  private ArrayList<SVGPath> centralAsiaPaths = new ArrayList<>();;
-  private ArrayList<SVGPath> arcticAmericaPaths = new ArrayList<>();;
-  private ArrayList<SVGPath> russiaCaucausPaths = new ArrayList<>();;
-  private ArrayList<SVGPath> europePaths = new ArrayList<>();;
-  private ArrayList<SVGPath> eastAsiaPaths = new ArrayList<>();;
-  private ArrayList<SVGPath> oceaniaPaths = new ArrayList<>();;
+  private ArrayList<SVGPath> africaPaths = new ArrayList<>();
+  private ArrayList<SVGPath> southAmericaPaths = new ArrayList<>();
+  private ArrayList<SVGPath> middleAmericaPaths = new ArrayList<>();
+  private ArrayList<SVGPath> californiaPaths = new ArrayList<>();
+  private ArrayList<SVGPath> PNWandMNTPaths = new ArrayList<>();
+  private ArrayList<SVGPath> northernPlanesPaths = new ArrayList<>();
+  private ArrayList<SVGPath> heartLandPaths = new ArrayList<>();
+  private ArrayList<SVGPath> southernPlanesDeltaStatesPaths = new ArrayList<>();
+  private ArrayList<SVGPath> southEastPaths = new ArrayList<>();
+  private ArrayList<SVGPath> northernCrescentPaths = new ArrayList<>();
+  private ArrayList<SVGPath> middleEastPaths = new ArrayList<>();
+  private ArrayList<SVGPath> southAsiaPaths = new ArrayList<>();
+  private ArrayList<SVGPath> centralAsiaPaths = new ArrayList<>();
+  private ArrayList<SVGPath> arcticAmericaPaths = new ArrayList<>();
+  private ArrayList<SVGPath> russiaCaucausPaths = new ArrayList<>();
+  private ArrayList<SVGPath> europePaths = new ArrayList<>();
+  private ArrayList<SVGPath> eastAsiaPaths = new ArrayList<>();
+  private ArrayList<SVGPath> oceaniaPaths = new ArrayList<>();
   
   public int clickedRegion;
   
@@ -172,20 +150,6 @@ public class BuildInteractiveRegions
         clicked = true;
         clickedRegion = 1;
     	}
-    //  if(gui.getPopupManager().isOpen()==null)
-     // {
-    //  clicked = true;
-    //  gui.getGraphManager().setRegionName("Sub Saharan");
-      //gui.getDraftLayout().getTickerReel().addMessage("Sub Saharan, Population: " + gui.getGraphManager().getPopulation(12));
-    //  gui.getPopupManager().toggleGraphDisplay();;
-   //  gui.getGraphManager().setRegionNum(12);
-      //clickedRegion = 1;
-     // System.out.println("in africa: " +clickedRegion);
-    //  gui.getDraftLayout().getGraphDisplay().setDataVisMode(0);
-     // styleRegionPaths(1, fillColor, 2); // Change Fill Color
-    //  }
-
-
     });
     africaSubPath.setOnMousePressed((event) ->
     {
@@ -197,20 +161,6 @@ public class BuildInteractiveRegions
         clicked = true;
         clickedRegion = 1;
     	}
-      // TODO: Have Africa's Regional Statics be displayed.
-    //  styleRegionPaths(1, fillColor, 2); // Change Fill Color
-    });
-    africaMainPath.setOnMouseReleased((event) ->
-    {
-//     if(!clicked)
-//      {
-//      styleRegionPaths(1, TRANSPARENT, 2); // Change Fill Color
-//      }
-
-    });
-    africaSubPath.setOnMouseReleased((event) ->
-    {
-    //  styleRegionPaths(1, TRANSPARENT, 2); // Change Fill Color
     });
     sp.getChildren().addAll(africaMainPath, africaSubPath);
   }
@@ -266,14 +216,6 @@ public class BuildInteractiveRegions
         clickedRegion = 2;
     	}
 
-    });
-
-    southAmericaPath.setOnMouseReleased((event) ->
-    {
-//      if(!clicked)
-//      {
-//      styleRegionPaths(2, TRANSPARENT, 2); // Change Fill Color
-//      }
     });
 
     sp.getChildren().add(southAmericaPath);
@@ -422,18 +364,6 @@ public class BuildInteractiveRegions
         clicked = true;
         clickedRegion = 3;
     	}
-//      if(gui.getPopupManager().isOpen()==null)
-//      {
-//      clicked = true;
-//      gui.getPopupManager().toggleGraphDisplay();;
-//      gui.getGraphManager().setRegionNum(8);
-//   //   gui.getDraftLayout().getTickerReel().addMessage("Middle America, Population: " + gui.getGraphManager().getPopulation(8));
-//      gui.getGraphManager().setRegionName("Middle America");
-//      clickedRegion = 3;
-//      gui.getDraftLayout().getGraphDisplay().setDataVisMode(0);
-//      styleRegionPaths(3, fillColor, 2); // Change Fill Color);
-//      }
-
     });
     middleAmericaLargeSubPath1.setOnMousePressed((event) ->
     {
@@ -445,9 +375,6 @@ public class BuildInteractiveRegions
         clicked = true;
         clickedRegion = 3;
     	}
-     // System.out.println("Trigger Middle American Regional Stats");
-  //    styleRegionPaths(3, fillColor, 2); // Change Fill Color
-      // TODO: Have Middle America's Regional Statics be displayed.
     });
     middleAmericaLargeSubPath2.setOnMousePressed((event) ->
     {
@@ -459,27 +386,7 @@ public class BuildInteractiveRegions
         clicked = true;
         clickedRegion = 3;
     	}
-    //  System.out.println("Trigger Middle American Regional Stats");
-   //   styleRegionPaths(3, fillColor, 2); // Change Fill Color
-      // TODO: Have Middle America's Regional Statics be displayed.
     });
-    middleAmericaMainPath.setOnMouseReleased((event) ->
-    {
-//      if(!clicked)
-//      {
-//      styleRegionPaths(3, TRANSPARENT, 2); // Change Fill Color
-//      }
-
-    });
-    middleAmericaLargeSubPath1.setOnMouseReleased((event) ->
-    {
-   //   styleRegionPaths(3, TRANSPARENT, 2); // Change Fill Color
-    });
-    middleAmericaLargeSubPath2.setOnMouseReleased((event) ->
-    {
- //     styleRegionPaths(3, TRANSPARENT, 2); // Change Fill Color
-    });
-
     sp.getChildren().addAll(middleAmericaMainPath, middleAmericaLargeSubPath1,
         middleAmericaLargeSubPath2, middleAmericaSmallSubPath1,
         middleAmericaSmallSubPath2, middleAmericaSmallSubPath3,
@@ -537,28 +444,7 @@ public class BuildInteractiveRegions
         clicked = true;
         clickedRegion = 4;
     	}
-//      if(gui.getPopupManager().isOpen()==null)
-//      {
-//      clicked = true;
-//      gui.getPopupManager().toggleGraphDisplay();;
-//      gui.getGraphManager().setRegionNum(0);
-//      clickedRegion = 4;
-//    //  gui.getDraftLayout().getTickerReel().addMessage("California, Population: " + gui.getGraphManager().getPopulation(0));
-//      gui.getGraphManager().setRegionName("California");
-//      gui.getDraftLayout().getGraphDisplay().setDataVisMode(0);
-//      styleRegionPaths(4, fillColor, 2); // Change Fill Color
-//      }
-
     });
-
-    californiaPath.setOnMouseReleased((event) ->
-    {
-//      if(!clicked)
-//      {
-//      styleRegionPaths(4, TRANSPARENT, 2); // Change Fill Color
-//      }
-    });
-
     sp.getChildren().add(californiaPath);
   }
   /**
@@ -611,28 +497,7 @@ public class BuildInteractiveRegions
         clicked = true;
         clickedRegion = 5;
     	}
-//      if(gui.getPopupManager().isOpen()==null)
-//      {
-//      clicked = true;
-//      gui.getPopupManager().toggleGraphDisplay();;
-//      gui.getGraphManager().setRegionNum(6);
-//      clickedRegion = 5;
-//     // gui.getDraftLayout().getTickerReel().addMessage("PNW And MNT Region, Population: " + gui.getGraphManager().getPopulation(6));
-//      gui.getGraphManager().setRegionName("PNW And MNT Region");
-//      gui.getDraftLayout().getGraphDisplay().setDataVisMode(0);
-//      styleRegionPaths(5, fillColor, 2); // Change Fill Color
-//      }
-
     });
-
-    PNWAndMNTPath.setOnMouseReleased((event) ->
-    {
-//      if(!clicked)
-//      {
-//      styleRegionPaths(5, TRANSPARENT, 2); // Change Fill Color
-//      }
-    });
-
     sp.getChildren().add(PNWAndMNTPath);
   }
 /**
@@ -685,23 +550,7 @@ public class BuildInteractiveRegions
         clicked = true;
         clickedRegion = 6;
     	}
-//      clicked = true;
-//      gui.getPopupManager().toggleGraphDisplay();;
-//      gui.getGraphManager().setRegionNum(2);
-//      clickedRegion = 6;
-//    //  gui.getDraftLayout().getTickerReel().addMessage("Northern Planes, Population: " + gui.getGraphManager().getPopulation(2));
-//      gui.getGraphManager().setRegionName("Northern Planes");
-//      gui.getDraftLayout().getGraphDisplay().setDataVisMode(0);
-//      styleRegionPaths(6, fillColor, 2); // Change Fill Color
     });
-    northernPlanesPath.setOnMouseReleased((event) ->
-    {
-//      if(!clicked)
-//      {
-//      styleRegionPaths(6, TRANSPARENT, 2); // Change Fill Color
-//      }
-    });
-
     sp.getChildren().add(northernPlanesPath);
   }
 /**
@@ -756,28 +605,7 @@ public class BuildInteractiveRegions
         clicked = true;
         clickedRegion = 7;
     	}
-//      if(gui.getPopupManager().isOpen()==null)
-//      {
-//      clicked = true;
-//      gui.getPopupManager().toggleGraphDisplay();;
-//      gui.getGraphManager().setRegionNum(1);
-//      clickedRegion = 7;
-//   //   gui.getDraftLayout().getTickerReel().addMessage("HeartLands, Population: " + gui.getGraphManager().getPopulation(1));
-//      gui.getGraphManager().setRegionName("HeartLands");
-//      gui.getDraftLayout().getGraphDisplay().setDataVisMode(0);
-//      styleRegionPaths(7, fillColor, 2); // Change Fill Color
-//      }
-
     });
-    heartLandsPath.setOnMouseReleased((event) ->
-    {
-//
-//      if(!clicked)
-//      {
-//      styleRegionPaths(7, TRANSPARENT, 2); // Change Fill Color
-//      }
-    });
-
     sp.getChildren().add(heartLandsPath);
   }
 /**
@@ -832,27 +660,7 @@ public class BuildInteractiveRegions
         clicked = true;
         clickedRegion = 8;
     	}
-//      if(gui.getPopupManager().isOpen()==null)
-//      {
-//      clicked = true;
-//      gui.getPopupManager().toggleGraphDisplay();;
-//      gui.getGraphManager().setRegionNum(5);
-//   //   gui.getDraftLayout().getTickerReel().addMessage("Southern Planes, Population: " + gui.getGraphManager().getPopulation(5));;
-//      gui.getGraphManager().setRegionName("Southern Planes");
-//      clickedRegion = 8;
-//      gui.getDraftLayout().getGraphDisplay().setDataVisMode(0);
-//      styleRegionPaths(8, fillColor, 2); // Change Fill Color
-//      }
     });
-
-    southernPlanesDeltaStatesPath.setOnMouseReleased((event) ->
-    {
-//        if(!clicked)
-//        {
-//      styleRegionPaths(8, TRANSPARENT, 2); // Change Fill Color
-//        }
-    });
-
     sp.getChildren().add(southernPlanesDeltaStatesPath);
   }
 /**
@@ -905,27 +713,7 @@ public class BuildInteractiveRegions
         clicked = true;
         clickedRegion = 9;
     	}
-//      if(gui.getPopupManager().isOpen()==null)
-//      {
-//      clicked = true;
-//      gui.getPopupManager().toggleGraphDisplay();;
-//      gui.getGraphManager().setRegionNum(3);
-//      clickedRegion = 9;
-//    //  gui.getDraftLayout().getTickerReel().addMessage("Southeast, Population: " + gui.getGraphManager().getPopulation(3));
-//      gui.getGraphManager().setRegionName("Southeast");
-//      gui.getDraftLayout().getGraphDisplay().setDataVisMode(0);
-//      styleRegionPaths(9, fillColor, 2); // Change Fill Color
-//      }
-
     });
-    southeastPath.setOnMouseReleased((event) ->
-    {
-//        if(!clicked)
-//        {
-//      styleRegionPaths(9, TRANSPARENT, 2); // Change Fill Color
-//        }
-    });
-
     sp.getChildren().add(southeastPath);
   }
 /**
@@ -979,26 +767,7 @@ public class BuildInteractiveRegions
         clicked = true;
         clickedRegion = 10;
     	}
-//      if(gui.getPopupManager().isOpen()==null)
-//      {
-//      clicked = true;
-//      gui.getPopupManager().toggleGraphDisplay();;
-//      gui.getGraphManager().setRegionNum(4);
-//     // gui.getDraftLayout().getTickerReel().addMessage("Northern Crescent, Population: " + gui.getGraphManager().getPopulation(4));;
-//      gui.getGraphManager().setRegionName("Northern Crescent");
-//      clickedRegion = 10;
-//      gui.getDraftLayout().getGraphDisplay().setDataVisMode(0);
-//      styleRegionPaths(10, fillColor, 2); // Change Fill Color
-//      }
     });
-    northernCrescentPath.setOnMouseReleased((event) ->
-    {
-//        if(!clicked)
-//        {
-//      styleRegionPaths(10, TRANSPARENT, 2); // Change Fill Color
-//        }
-    });
-
     sp.getChildren().add(northernCrescentPath);
   }
 /**
@@ -1065,24 +834,6 @@ public class BuildInteractiveRegions
         clicked = true;
         clickedRegion = 11;
     	}
-//      if(gui.getPopupManager().isOpen()==null)
-//      {
-//      clicked = true;
-//      gui.getPopupManager().toggleGraphDisplay();;
-//      gui.getGraphManager().setRegionNum(11);
-//      clickedRegion = 11;
-//      //gui.getDraftLayout().getTickerReel().addMessage("Middle East, Population: " + gui.getGraphManager().getPopulation(11));;
-//      gui.getGraphManager().setRegionName("Middle East");
-//      gui.getDraftLayout().getGraphDisplay().setDataVisMode(0);
-//      styleRegionPaths(11, fillColor, 2); // Change Fill Color
-//      }
-    });
-    middleEastMainPath.setOnMouseReleased((event) ->
-    {
-//        if(!clicked)
-//        {
-//      styleRegionPaths(11, TRANSPARENT, 2); // Change Fill Color
-//        }
     });
 
     sp.getChildren().addAll(middleEastMainPath, middleEastSubPath);
@@ -1138,26 +889,7 @@ public class BuildInteractiveRegions
         clicked = true;
         clickedRegion = 12;
     	}
-//      if(gui.getPopupManager().isOpen()==null)
-//      {
-//      clicked = true;
-//      gui.getPopupManager().toggleGraphDisplay();;
-//      gui.getGraphManager().setRegionNum(14);
-//      //gui.getDraftLayout().getTickerReel().addMessage("Central Asia, Population: " + gui.getGraphManager().getPopulation(14));;
-//      gui.getGraphManager().setRegionName("Central Asia");
-//      clickedRegion = 12;
-//      gui.getDraftLayout().getGraphDisplay().setDataVisMode(0);
-//      styleRegionPaths(12, fillColor, 2); // Change Fill Color
-//      }
  
-    });
-
-    centralAsiaPath.setOnMouseReleased((event) ->
-    {
-//        if(!clicked)
-//        {
-//      styleRegionPaths(12, TRANSPARENT, 2); // Change Fill Color
-//        }
     });
     sp.getChildren().add(centralAsiaPath);
   }
@@ -1179,10 +911,7 @@ public class BuildInteractiveRegions
     southAsiaBoarderGlow.setColor(GlowColor);
     southAsiaBoarderGlow.setWidth(DEPTH);
     southAsiaBoarderGlow.setHeight(DEPTH);
-
-    
-    
-    
+  
     SVGPath southAsiaMainPath = new SVGPath();
     
     southAsiaMainPath.setFill(TRANSPARENT);
@@ -1230,26 +959,8 @@ public class BuildInteractiveRegions
         clicked = true;
         clickedRegion = 13;
     	}
-//      if(gui.getPopupManager().isOpen()==null)
-//      {
-//      clicked = true;
-//      gui.getPopupManager().toggleGraphDisplay();;
-//      gui.getGraphManager().setRegionNum(15);
-//      //gui.getDraftLayout().getTickerReel().addMessage("South Asia");
-//      gui.getGraphManager().setRegionName("South Asia");
-//      clickedRegion = 13;
-//      gui.getDraftLayout().getGraphDisplay().setDataVisMode(0);
-//      styleRegionPaths(13, fillColor, 2); // Change Fill Color
-//      }
     });
 
-    southAsiaMainPath.setOnMouseReleased((event) ->
-    {
-//        if(!clicked)
-//        {
-//      styleRegionPaths(13, TRANSPARENT, 2); // Change Fill Color
-//        }
-    });
     sp.getChildren().addAll(southAsiaMainPath, southAsiaSubPath);
   }
   /**
@@ -1376,20 +1087,6 @@ public class BuildInteractiveRegions
         clicked = true;
         clickedRegion = 14;
     	}
-//      if(gui.getPopupManager().isOpen()==null)
-//      {
-//      //  gui.getDraftLayout().getTickerReel().addMessage("Arctic America, Population: " + gui.getGraphManager().getPopulation(7));
-//      gui.getGraphManager().setRegionName("Arctic America");
-//    	clicked = true;
-//    	gui.getPopupManager().toggleGraphDisplay();
-//    	//gui.getGraphManager().updateCurrentRegionName("Artic America");
-//    	gui.getGraphManager().setRegionNum(7);
-//     // System.out.println("Trigger South Asia's Regional Stats");
-//      clickedRegion = 14;
-//      gui.getDraftLayout().getGraphDisplay().setDataVisMode(0);
-//      styleRegionPaths(14,RegionColor,1);
-//      styleRegionPaths(14, fillColor, 2); // Change Fill Color
-//      }
     });
     arcticAmericaMainPath2.setOnMousePressed((event) ->
     {
@@ -1401,21 +1098,6 @@ public class BuildInteractiveRegions
         clicked = true;
         clickedRegion = 14;
     	}
-     // System.out.println("Trigger South Asia's Regional Stats");
-     // styleRegionPaths(14, fillColor, 2); // Change Fill Color
-      // TODO: Have South Asia's Regional Statics be displayed.
-    });
-
-    arcticAmericaMainPath1.setOnMouseReleased((event) ->
-    {
-//      if(!clicked)
-//      {
-//      styleRegionPaths(14, TRANSPARENT, 2); // Change Fill Color
-//      }
-    });
-    arcticAmericaMainPath2.setOnMouseReleased((event) ->
-    {
-  //    styleRegionPaths(14, TRANSPARENT, 2); // Change Fill Color
     });
     sp.getChildren().addAll(arcticAmericaMainPath1, arcticAmericaMainPath2,
         arcticAmericaSubPath1, arcticAmericaSubPath2, arcticAmericaSubPath3,
@@ -1516,8 +1198,7 @@ public class BuildInteractiveRegions
     });
 
     russiaCaucausMainPath.setOnMousePressed((event) ->
-    {
-    	
+    {    	
     	if(!clicked)
     	{
     	styleRegionPaths(15, fillColor, 2);
@@ -1526,27 +1207,7 @@ public class BuildInteractiveRegions
         clicked = true;
         clickedRegion = 15;
     	}
-//      if(gui.getPopupManager().isOpen()==null)
-//      {
-//      clicked = true;
-//      gui.getPopupManager().toggleGraphDisplay();;
-//      gui.getGraphManager().setRegionNum(13);
-//     // gui.getDraftLayout().getTickerReel().addMessage("Russia Caucaus, Population: " + gui.getGraphManager().getPopulation(13));;
-//      gui.getGraphManager().setRegionName("Russia Caucaus");
-//      clickedRegion = 15;
-//      gui.getDraftLayout().getGraphDisplay().setDataVisMode(0);
-//      styleRegionPaths(15, fillColor, 2); // Change Fill Color
-//      }
     });
-
-    russiaCaucausMainPath.setOnMouseReleased((event) ->
-    {    
-//    	if(!clicked)
-//    {
-//      styleRegionPaths(15, TRANSPARENT, 2); // Change Fill Color
-//    }
-    });
-
     sp.getChildren().addAll(russiaCaucausMainPath, russiaCaucausSubPath1,
         russiaCaucausSubPath2, russiaCaucausSubPath3, russiaCaucausSubPath4);
 
@@ -1706,30 +1367,7 @@ public class BuildInteractiveRegions
         clicked = true;
         clickedRegion = 16;
     	}
-//      if(gui.getPopupManager().isOpen()==null)
-//      {
-//      //  System.out.println("here1");
-//       // gui.getDraftLayout().getTickerReel().addMessage("Europe, Population: " + gui.getGraphManager().getPopulation(10));;
-//      gui.getGraphManager().setRegionName("Europe");
-//      clicked = true;
-//      gui.getPopupManager().toggleGraphDisplay();;
-//      gui.getGraphManager().setRegionNum(10);
-//      clickedRegion = 16;
-//    //  System.out.println("clickedRegion1: " + clickedRegion);
-//      gui.getDraftLayout().getGraphDisplay().setDataVisMode(0);
-//      styleRegionPaths(16, fillColor, 2); // Change Fill Color
-//         
-//      }
     });
-    europeMainPath.setOnMouseReleased((event) ->
-    {
-//        if(!clicked)
-//        {
-//          styleRegionPaths(16, TRANSPARENT, 2); // Change Fill Color
-//          // TODO: Have Eurpoe's Regional Statics be displayed.
-//        }
-    });
-
     europeSubPath1.setOnMousePressed((event) ->
     {
     	if(!clicked)
@@ -1740,9 +1378,6 @@ public class BuildInteractiveRegions
         clicked = true;
         clickedRegion = 16;
     	}
-     // System.out.println("Trigger Europes Regional Stats");
-  //    styleRegionPaths(16, fillColor, 2); // Change Fill Color
-      // TODO: Have Eurpoe's Regional Statics be displayed.
     });
     europeSubPath2.setOnMousePressed((event) ->
     {
@@ -1754,9 +1389,6 @@ public class BuildInteractiveRegions
         clicked = true;
         clickedRegion = 16;
     	}
-     // System.out.println("Trigger Europes Regional Stats");
-    //  styleRegionPaths(16, fillColor, 2); // Change Fill Color
-      // TODO: Have Eurpoe's Regional Statics be displayed.
     });
     europeSubPath3.setOnMousePressed((event) ->
     {
@@ -1768,25 +1400,7 @@ public class BuildInteractiveRegions
         clicked = true;
         clickedRegion = 16;
     	}
-     // System.out.println("Trigger Europes Regional Stats");
-    //  styleRegionPaths(16, fillColor, 2); // Change Fill Color
-      // TODO: Have Eurpoe's Regional Statics be displayed.
     });
-
-    europeSubPath1.setOnMouseReleased((event) ->
-    {
-  //    styleRegionPaths(16, TRANSPARENT, 2); // Change Fill Color
-    });
-    europeSubPath2.setOnMouseReleased((event) ->
-    {
- //     styleRegionPaths(16, TRANSPARENT, 2); // Change Fill Color
-    });
-
-    europeSubPath3.setOnMouseReleased((event) ->
-    {
- //     styleRegionPaths(16, TRANSPARENT, 2); // Change Fill Color
-    });
-
     sp.getChildren().addAll(europeMainPath, europeSubPath1, europeSubPath2,
         europeSubPath3, europeSubPath4, europeSubPath5, europeSubPath6);
   }
@@ -1898,27 +1512,8 @@ public class BuildInteractiveRegions
         clicked = true;
         clickedRegion = 17;
     	}
-//      if(gui.getPopupManager().isOpen()==null)
-//      {
-//      clicked = true;
-//    //  gui.getDraftLayout().getTickerReel().addMessage("East Asia, Population: " + gui.getGraphManager().getPopulation(16));;
-//      gui.getGraphManager().setRegionName("East Asia");
-//      gui.getPopupManager().toggleGraphDisplay();;
-//      gui.getGraphManager().setRegionNum(16);
-//      clickedRegion = 17;
-//      gui.getDraftLayout().getGraphDisplay().setDataVisMode(0);
-//      styleRegionPaths(17, fillColor, 2); // Change Fill Color;
-//      }
-
     });
 
-    eastAsiaMainPath.setOnMouseReleased((event) ->
-    {
-//        if(!clicked)
-//        {
-//      styleRegionPaths(17, TRANSPARENT, 2); // Change Fill Color
-//        }
-    });
     eastAsiaSubPath1.setOnMousePressed((event) ->
     {
     	if(!clicked)
@@ -1929,14 +1524,6 @@ public class BuildInteractiveRegions
         clicked = true;
         clickedRegion = 17;
     	}
-    //  System.out.println("Trigger East Asia Regional Stats");
-      // TODO: Have East Asia's Regional Statics be displayed.
-     // styleRegionPaths(17, fillColor, 2); // Change Fill Color
-    });
-
-    eastAsiaSubPath1.setOnMouseReleased((event) ->
-    {
-  //    styleRegionPaths(17, TRANSPARENT, 2); // Change Fill Color
     });
 
     eastAsiaSubPath2.setOnMousePressed((event) ->
@@ -1949,14 +1536,6 @@ public class BuildInteractiveRegions
         clicked = true;
         clickedRegion = 17;
     	}
-     // System.out.println("Trigger East Asia Regional Stats");
-      // TODO: Have East Asia's Regional Statics be displayed.
-   //   styleRegionPaths(17, fillColor, 2); // Change Fill Color
-    });
-
-    eastAsiaSubPath2.setOnMouseReleased((event) ->
-    {
-  //    styleRegionPaths(17, TRANSPARENT, 2); // Change Fill Color
     });
     sp.getChildren().addAll(eastAsiaMainPath, eastAsiaSubPath1,
         eastAsiaSubPath2, eastAsiaSubPath3);
@@ -2243,16 +1822,7 @@ public class BuildInteractiveRegions
         clicked = true;
         clickedRegion = 18;
     	}
-    //  System.out.println("Trigger Oceania Regional Stats");
-      // TODO: Have Oceania's Regional Statics be displayed.
-     // styleRegionPaths(18, fillColor, 2); // Change Fill Color
     });
-
-    oceaniaSubPath1.setOnMouseReleased((event) ->
-    {
-   //   styleRegionPaths(18, TRANSPARENT, 2); // Change Fill Color
-    });
-
     oceaniaSubPath2.setOnMousePressed((event) ->
     {
     	if(!clicked)
@@ -2263,16 +1833,7 @@ public class BuildInteractiveRegions
         clicked = true;
         clickedRegion = 18;
     	}
-     // System.out.println("Trigger Oceania Regional Stats");
-      // TODO: Have Oceania's Regional Statics be displayed.
-   //   styleRegionPaths(18, fillColor, 2); // Change Fill Color
     });
-
-    oceaniaSubPath2.setOnMouseReleased((event) ->
-    {
-   //   styleRegionPaths(18, TRANSPARENT, 2); // Change Fill Color
-    });
-
     oceaniaSubPath4.setOnMousePressed((event) ->
     {
     	if(!clicked)
@@ -2283,16 +1844,7 @@ public class BuildInteractiveRegions
         clicked = true;
         clickedRegion = 18;
     	}
-     // System.out.println("Trigger Oceania Regional Stats");
-      // TODO: Have Oceania's Regional Statics be displayed.
-    //  styleRegionPaths(18, fillColor, 2); // Change Fill Color
     });
-
-    oceaniaSubPath4.setOnMouseReleased((event) ->
-    {
-    //  styleRegionPaths(18, TRANSPARENT, 2); // Change Fill Color
-    });
-
     oceaniaMainPath.setOnMousePressed((event) ->
     {
     	if(!clicked)
@@ -2303,41 +1855,19 @@ public class BuildInteractiveRegions
         clicked = true;
         clickedRegion = 18;
     	}
-//      if(gui.getPopupManager().isOpen()==null)
-//      {
-//      clicked = true;
-//      gui.getPopupManager().toggleGraphDisplay();;
-//      gui.getGraphManager().setRegionNum(17);
-//      clickedRegion = 18;
-//   //   gui.getDraftLayout().getTickerReel().addMessage("Oceania, Population: " + gui.getGraphManager().getPopulation(17));;
-//      gui.getGraphManager().setRegionName("Oceania");
-//      gui.getDraftLayout().getGraphDisplay().setDataVisMode(0);
-//      styleRegionPaths(18, fillColor, 2); // Change Fill Color
-//      }
     });
-
-    oceaniaMainPath.setOnMouseReleased((event) ->
-    {
-//        if(!clicked)
-//        {
-//          styleRegionPaths(18, TRANSPARENT, 2); // Change Fill Color
-//        }
-    });
-
     sp.getChildren().addAll(oceaniaMainPath, oceaniaSubPath1, oceaniaSubPath2,
         oceaniaSubPath3, oceaniaSubPath4, oceaniaSubPath5, oceaniaSubPath6,
         oceaniaSubPath7, oceaniaSubPath8, oceaniaSubPath9, oceaniaSubPath10,
         oceaniaSubPath11, oceaniaSubPath12, oceaniaSubPath13, oceaniaSubPath14,
         oceaniaSubPath15, oceaniaSubPath16, oceaniaSubPath17);
   }
-
-  
+ 
   public void setStatController(FXStatisticalDisplaysController statController)
   {
 	  this.statController = statController;
   }
-  
-  
+   
   
   /**
    * 
@@ -2352,8 +1882,6 @@ public class BuildInteractiveRegions
    */
   private void styleRegionPaths(int Region, Color color, int mode)
   {
-  //  System.out.println("afterRegion2 " + gui.getDraftLayout().getWorldMap().get);
-  //  System.out.println("clickedRegion after it: " + clickedRegion);
     switch (Region)
     {
     case 1: // Africa
