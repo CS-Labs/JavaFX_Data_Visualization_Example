@@ -91,9 +91,9 @@ public class FXStatisticalDisplaysController
 
   // Get resources.
   ImageView left = new ImageView(
-      new Image(getClass().getResourceAsStream("/FXDataVis/left.png")));
+      new Image(getClass().getResourceAsStream("/FXDataVis/Resources/left.png")));
   ImageView right = new ImageView(
-      new Image(getClass().getResourceAsStream("/FXDataVis/right.png")));
+      new Image(getClass().getResourceAsStream("/FXDataVis/Resources/right.png")));
 
   /**
    * Initialize the buttons.
@@ -115,11 +115,11 @@ public class FXStatisticalDisplaysController
     
     //Set CSS style sheets. 
     barChart.getStylesheets().add(
-        getClass().getResource("/FXDataVis/barChartCSS.css").toExternalForm());
+        getClass().getResource("/FXDataVis/Resources/barChartCSS.css").toExternalForm());
     barChart.applyCss();
 
     pieChart.getStylesheets().add(
-        getClass().getResource("/FXDataVis/pieChartCSS.css").toExternalForm());
+        getClass().getResource("/FXDataVis/Resources/pieChartCSS.css").toExternalForm());
 
     regionNameLabel.setTextFill(Color.web("#FFFFFF")); // White
     leftButton.setVisible(false); // Can't go left to start. 
