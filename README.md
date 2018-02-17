@@ -8,7 +8,7 @@ creating custom SVG Path objects. These things are demoed through a global map t
 that light up upon mouse entrance and regional statistical popups which can be triggered by clicking
 on one of the regions.
 
-![alt text](https://github.com/CS-Labs/JavaFX_Data_Visualization_Example/edit/master/example.gif "example")
+![Example](https://github.com/CS-Labs/JavaFX_Data_Visualization_Example/blob/master/example.gif "example")
 
  **Copyright (C) {2016}  {Christian Seely}**
 
